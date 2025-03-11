@@ -192,6 +192,7 @@ filter:
               - font-size: 12px
               - text-align: end
               - text-transform: capitalize
+              - margin-left: "-80px;"
             bandwidth:
               - text-transform: capitalize
               - text-align: end
