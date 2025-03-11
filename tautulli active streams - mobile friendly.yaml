@@ -173,9 +173,10 @@ filter:
             title:
               - text-transform: capitalize
               - text-align: start
-              - font-size: 18px
+              - font-size: 14px
               - margin-top: "-5px"
               - margin-bottom: 2px
+              - font-weight: bold;
             stream:
               - text-transform: capitalize
               - text-align: start
@@ -191,8 +192,8 @@ filter:
             location:
               - font-size: 12px
               - text-align: end
+              - margin-left: "-180px;"
               - text-transform: capitalize
-              - margin-left: "-80px;"
             bandwidth:
               - text-transform: capitalize
               - text-align: end
