@@ -116,10 +116,16 @@ filter:
           media_detail: |
             [[[
               if(states[variables.entity].attributes.media_type == 'movie') {
-                return "<ha-icon icon='mdi:filmstrip' style='width: 15px; height: 8px; position: relative; top: -2px;'></ha-icon> (" + states[variables.entity].attributes.year + ") - " + states[variables.entity].attributes.geo_city + ", " + states[variables.entity].attributes.geo_region + "";
+                return "<ha-icon icon='mdi:filmstrip' style='width: 15px; height: 8px; position: relative; top: -2px;'></ha-icon> (" + states[variables.entity].attributes.year + ")";
               } else {
-                return "<ha-icon icon='mdi:television-classic' style='width: 15px; height: 10px; position: relative; top: -2px;'></ha-icon> S" + states[variables.entity].attributes.parent_media_index + " • E" + states[variables.entity].attributes.media_index + " - " + states[variables.entity].attributes.geo_city + ", " + states[variables.entity].attributes.geo_region;
+                return "<ha-icon icon='mdi:television-classic' style='width: 15px; height: 10px; position: relative; top: -2px;'></ha-icon> S" + states[variables.entity].attributes.parent_media_index + " • E" + states[variables.entity].attributes.media_index;
               }
+            ]]]
+          location: |
+            [[[
+              var city = states[variables.entity].attributes.geo_city;
+              var state = states[variables.entity].attributes.geo_region;
+              return city + ", " + state + '</i>';
             ]]]
           bandwidth: |
             [[[ 
@@ -182,6 +188,10 @@ filter:
               - text-transform: capitalize
               - text-align: start
               - font-size: 13px
+            location:
+              - font-size: 12px
+              - text-align: end
+              - text-transform: capitalize
             bandwidth:
               - text-transform: capitalize
               - text-align: end
@@ -191,7 +201,7 @@ filter:
             - grid-template-areas: |
                 "picture product user"
                 "picture title title"    
-                "picture media_detail media_detail"
+                "picture media_detail location"
                 "picture bar bar"
                 "picture stream bandwidth"
             - grid-template-columns: 1fr 200px 3fr
