@@ -1,0 +1,213 @@
+type: vertical-stack
+cards:
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: "#hvac"
+    name: ""
+    show_header: true
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: thermostat
+        entity: climate.thermostat
+        features:
+          - style: icons
+            type: climate-hvac-modes
+            hvac_modes:
+              - heat_cool
+              - heat
+              - cool
+              - fan_only
+              - "off"
+        show_current_as_primary: true
+      - features:
+          - type: custom:service-call
+            entries:
+              - type: dropdown
+                entity_id: input_number.thermostat_sleep_duration
+                options:
+                  - entity_id: input_number.thermostat_sleep_duration
+                    option: "15"
+                    tap_action:
+                      action: perform-action
+                      perform_action: input_number.set_value
+                      target:
+                        entity_id:
+                          - input_number.thermostat_sleep_duration
+                      data:
+                        value: 15
+                    label: 15 Min
+                  - entity_id: input_number.thermostat_sleep_duration
+                    option: "30"
+                    tap_action:
+                      action: perform-action
+                      perform_action: input_number.set_value
+                      target:
+                        entity_id:
+                          - input_number.thermostat_sleep_duration
+                      data:
+                        value: 30
+                    label: 30 Min
+                  - entity_id: input_number.thermostat_sleep_duration
+                    option: "45"
+                    tap_action:
+                      action: perform-action
+                      perform_action: input_number.set_value
+                      target:
+                        entity_id:
+                          - input_number.thermostat_sleep_duration
+                      data:
+                        value: 45
+                    label: 45 Min
+                  - entity_id: input_number.thermostat_sleep_duration
+                    option: "60"
+                    tap_action:
+                      action: perform-action
+                      perform_action: input_number.set_value
+                      target:
+                        entity_id:
+                          - input_number.thermostat_sleep_duration
+                      data:
+                        value: 60
+                    label: 1 Hour
+                  - entity_id: input_number.thermostat_sleep_duration
+                    option: "120"
+                    tap_action:
+                      action: perform-action
+                      perform_action: input_number.set_value
+                      target:
+                        entity_id:
+                          - input_number.thermostat_sleep_duration
+                      data:
+                        value: 120
+                    label: 2 Hours
+                  - entity_id: input_number.thermostat_sleep_duration
+                    option: "240"
+                    tap_action:
+                      action: perform-action
+                      perform_action: input_number.set_value
+                      target:
+                        entity_id:
+                          - input_number.thermostat_sleep_duration
+                      data:
+                        value: 240
+                    label: 4 Hours
+                autofill_entity_id: false
+              - type: button
+                entity_id: timer.thermostat_sleep_timer
+                label: Start
+                icon: mdi:play
+                tap_action:
+                  action: perform-action
+                  perform_action: script.hvac_sleep_30_minute
+                  target:
+                    entity_id: timer.thermostat_sleep_timer
+                  data: {}
+                styles: ""
+                autofill_entity_id: false
+              - type: button
+                entity_id: timer.thermostat_sleep_timer
+                label: Cancel
+                icon: mdi:stop
+                tap_action:
+                  action: perform-action
+                  perform_action: script.cancel_thermostat_sleep_timer
+                  target:
+                    entity_id: timer.thermostat_sleep_timer
+                  data: {}
+        type: tile
+        entity: timer.thermostat_sleep_timer
+        color: green
+        name: Sleep Timer
+        tap_action:
+          action: none
+        icon_tap_action:
+          action: none
+        state_content:
+          - remaining_time
+          - finishes_at
+        features_position: bottom
+        vertical: false
+    card_mod:
+      style: |
+        ha-card {
+        box-shadow: none !important;
+        border: none !important;
+        }
+  - type: horizontal-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.kitchen_meter_temperature
+        name: Kitchen
+        icon: mdi:sofa
+        sub_button:
+          - entity: sensor.kitchen_meter_humidity
+            show_state: true
+            show_background: false
+        scrolling_effect: false
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.master_bedroom_meter_temperature
+        name: Primary
+        icon: mdi:bed-double
+        sub_button:
+          - entity: sensor.master_bedroom_meter_humidity
+            show_state: true
+            show_background: false
+        scrolling_effect: false
+  - type: horizontal-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.water_heater_water_sensor_temperature
+        name: Garage
+        icon: mdi:garage
+        tap_action:
+          action: none
+        button_action:
+          tap_action:
+            action: none
+        sub_button: []
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.office_meter_temperature
+        name: Office
+        icon: mdi:chair-rolling
+        sub_button:
+          - entity: sensor.office_meter_humidity
+            show_background: false
+            show_state: true
+            tap_action:
+              action: none
+  - type: horizontal-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.nursery_meter_temperature
+        name: Nursery
+        icon: mdi:human-baby-changing-table
+        sub_button:
+          - entity: sensor.nursery_meter_humidity
+            show_background: false
+            show_state: true
+            tap_action:
+              action: none
+        scrolling_effect: false
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.kids_room_meter_temperature
+        name: Kid's Room
+        icon: mdi:baby-face
+        sub_button:
+          - entity: sensor.kids_room_meter_humidity
+            show_background: false
+            show_state: true
+            tap_action:
+              action: none
+        scrolling_effect: false
